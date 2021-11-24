@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+
+{% extends 'market/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    <h1>Welcome to the New Client Form Page</h1>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    </div>
+
+{% endblock %}

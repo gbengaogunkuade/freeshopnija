@@ -1,0 +1,27 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!-- for loading "django.contrib.humanize" responsible for adding human touch to templates -->
+{% load humanize %}
+
+
+{% block content %}
+
+
+
+
+
+<!-- search form -->
+<div style="height:450px;">
+    <form class="d-flex" method="GET" action="{% url 'market:market_search_result' %}">
+      {% csrf_token %}
+      <input style="width:100%; border: 2px solid #a09d9d;" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-danger" type="submit">Search</button>
+    </form>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FOR LOADING STATIC FILES (css, javascript, pdf, docx, static images etc) -->
+    {% load static %}
+
+    <link rel="icon" type="image/png" href="{% static 'images/FreeShopLogo.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+
+    <!-- BOOTSTRAP ICONS stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
+      <!-- PERSONAL CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- GOOGLE CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Berkshire+Swash&family=Chewy&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@300;400;900&family=Gudea&family=Ma+Shan+Zheng&family=Staatliches&display=swap" rel="stylesheet">
+
+
+
+
+  <!-- PAGE TITLE -->
+  <!-- NOTE: THE VARIABLE NAME "pageTitle" USED BELOW HAS TO BE DEFINED IN VIEWS.PY -->
+    {% if pageTitle %}
+        <title>{{ pageTitle }}</title>
+    {% else %}
+        <title>FREESHOP</title>
+    {% endif %}
+
+
+
+    <!-- --------------------------- STYLING BEGINS -------------------------------- -->
+    <style>
+
+      html, body {
+      width:100%;
+      height: 100%;
+      margin: 0 auto 0 auto;
+      background-color:rgba(255, 255, 255, 0.842);
+      }
+
+
+      .full_height {
+      height: 100%;
+      }
+
+
+
+      /* FIXED MENU */
+      .menuFixed {
+        position: fixed;
+        top: 0;
+        right:0;
+        left:0;
+        z-index: 3;
+      }
+
+
+      /* STICKY MENU */
+      .menuSticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      }
+
+
+      /* ---------------------  SPECIALCARD STYLING  -------------------------- */
+
+      .specialcard {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.26);
+      /* transition: 0.3s; */
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      }
+      
+      .specialcard:hover {
+      box-shadow: 0 12px 24px 0 rgba(10, 0, 0, 0.397);
+      /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+      }
+
+
+
+
+      /* ---------------------  SPECIALDETAILCARD STYLING  -------------------------- */
+
+      .specialdetailcard {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.26);
+      /* transition: 0.3s; */
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      }
+      
+      .specialdetailcard:hover {
+      box-shadow: 0 3px 6px 0 rgba(10, 0, 0, 0.397);
+      /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+      }
+
+
+
+
+
+
+
+      /* ---------------------  DJANGO MESSAGES STYLING  -------------------------- */
+      
+      .messageFixed {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        font-size:35px;
+        z-index: 4;
+      }
+
+
+
+      /* ---------------------  DETAILVIEW FORM STYLING  -------------------------- */
+
+      .detailviewform {
+          width: 300px;
+          margin: 0 auto;
+          text-align: center;
+          padding-top:15px;
+          }
+
+      .value-button {
+          display: inline-block;
+          border: 1px solid #ddd;
+          margin: 0px;
+          width: 40px;
+          height: 20px;
+          text-align: center;
+          vertical-align: middle;
+          padding: 11px 0;
+          background: #eee;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+
+      .value-button:hover {
+          cursor: pointer;
+      }
+
+      form #decrease {
+          margin-right: -4px;
+          border-radius: 8px 0 0 8px;
+      }
+
+      form #increase {
+          margin-left: -4px;
+          border-radius: 0 8px 8px 0;
+      }
+
+      form #input-wrap {
+          margin: 0px;
+          padding: 0px;
+      }
+
+      input#number {
+          text-align: center;
+          border: none;
+          /* border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; */
+          padding:0 5px 0 5px;
+          margin: 0px 5px 0 5px;
+          width: 60px;
+          height: 40px;
+          color:rgb(0, 0, 0);
+          font-weight: bold;
+      }
+
+
+      .mybuttons {
+          text-align: center;
+          border: none;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          margin: 0px;
+          width: 40px;
+          height: 40px;
+          background-color: aqua;
+      }
+
+
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+
+
+
+      /* ---------------------  LINK STYLING  -------------------------- */
+
+      a:link {
+      text-decoration: none;
+      }
+
+      a:visited {
+      text-decoration: none;
+      }
+
+      a:hover {
+      text-decoration: none;
+      }
+
+      a:active {
+      text-decoration: none;
+      }
+
+
+
+      /* ---------------------  LOGIN ALERT STYLING  -------------------------- */
+
+      .loginFixed {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 550px;
+      z-index: 0;
+      }
+
+
+      /* --------------------------- FULL SCREEN OVERLAY NAVIGATION STYLING ------------------------------------ */
+
+      .overlay {
+      height: 0%;
+      width: 100%;
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0, 0.9);
+      overflow-y: hidden;
+      transition: 0.5s;
+      }
+
+    .overlay-content {
+      position: relative;
+      top: 15%;
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .overlay a:hover, .overlay a:focus {
+      color: #f1f1f1;
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 60px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .overlay {overflow-y: auto;}
+      .overlay a {font-size: 20px}
+      .overlay .closebtn {
+      font-size: 40px;
+      top: 15px;
+      right: 35px;
+      }
+    }
+
+
+
+      /*------------------------ MODAL BOX STYLING ----------------------------------*/
+
+      /* The Modal (background) */
+      .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 0px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content */
+      .modal-content {
+      background-color: #FFFFFF;
+      opacity: 1;
+      color:#000000;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 70%;
+      height: 50%;
+      top:30%;
+      }
+
+      /* The Close Button */
+      .close {
+      color: #ffffff;
+      float: right;
+      font-size: 22px;
+      font-weight:bold;
+      }
+
+      .close:hover,
+      .close:focus {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      cursor: pointer;
+      }
+
+
+
+
+
+
+  </style>
+  <!-- --------------------------- STYLING ENDS -------------------------------- -->
+
+
+
+  </head>
+
+
+  <body>
+
+    
+    <!-- FULL SCREEN OVERLAY NAVIGATION MENU OPTIONS  -->
+
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="{% url 'market:create' %}">Sell</a>
+        </div>
+    </div>
+
+
+
+    
+<!-- NAVIGATION MENU -->
+<!-- WITH A CONDITION OF THE MENU TO DISPLAY IF USER SUCCESSFULLY LOG IN OR NOT-->
+
+{% if user.is_authenticated %}
+<nav class="menuFixed navbar navbar-expand-lg navbar-dark bg-dark p-2" style="font-size: 20px;">
+      <ul class="nav">
+
+          <a onclick="openNav()" class="navbar-brand" style="font-size: 30px; font-family: 'Berkshire Swash', cursive; color:#ffffff;" href="#">FreeShop Online</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                <div class="navbar-nav">
+
+                    <li class="nav-item me-1">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+
+                    <li class="nav-item me-1">
+                        <a class="nav-link" href="#">Electronics</a>
+                    </li>
+
+                    <li class="nav-item me-1">
+                        <a class="nav-link" href="#">Phones & Tablets</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                      <a class="nav-link" href="#">Vehicles</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                      <a class="nav-link" href="#">Fashion</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                      <a class="nav-link" href="#">Baby Products</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                      <a class="nav-link" href="#">Others</a>
+                    </li>
+
+                    <li class="nav-item me-3">
+                      <a style="color:#2f60ff;" class="nav-link" href="{% url 'freeshop_profile' %}">{{ user.first_name }}'s Profile</a>
+                    </li>
+
+
+                    <li class="nav-item me-3">
+                      <a style="color:#ee2c2c;" class="nav-link" href="{% url 'freeshop_logout' %}">Logout</a>
+                    </li>
+
+                  </div>
+          </div>
+      </ul>
+    </nav>
+
+
+{% else %}
+
+    <nav class="menuFixed navbar navbar-expand-lg navbar-dark bg-dark p-2" style="font-size: 20px;">
+
+      <ul class="nav">
+
+        <a onclick="openNav()" class="navbar-brand" style="font-size: 30px; font-family: 'Berkshire Swash', cursive; color:#ffffff;" href="#">FreeShop Online</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+              <div class="navbar-nav">
+
+                <li class="nav-item me-1">
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+
+              <li class="nav-item me-1">
+                  <a class="nav-link" href="{% url 'market:market_category_electronics' %}">Electronics</a>
+              </li>
+
+              <li class="nav-item me-1">
+                  <a class="nav-link" href="{% url 'market:market_category_phones' %}">Phones & Tablets</a>
+              </li>
+
+              <li class="nav-item me-3">
+                <a class="nav-link" href="{% url 'market:market_category_vehicles' %}">Vehicles</a>
+              </li>
+
+              <li class="nav-item me-3">
+                <a class="nav-link" href="{% url 'market:market_category_fashion' %}">Fashion</a>
+              </li>
+
+              <li class="nav-item me-3">
+                <a class="nav-link" href="{% url 'market:market_category_baby_products' %}">Baby Products</a>
+              </li>
+
+              <li class="nav-item me-3">
+                <a class="nav-link" href="{% url 'market:market_category_others' %}">Others</a>
+              </li>
+
+              <li class="nav-item">
+                <a style="font-size:18px; color:#FFFFFF;" class="nav-link btn btn-primary btn-sm px-4 me-4" href="{% url 'freeshop_login' %}">Login</a>
+              </li>
+
+              </div>
+
+        </div>
+
+    </ul>
+
+  </nav>
+
+
+{% endif %}
+
+
+
+<!-- messages -->
+{% if messages %}
+    <div class="messageFixed">{% include 'market/messages.html' %}</div>
+{% endif %}
+
+
+
+<!-- search form -->
+<!-- <div class="container mt-5">
+  <form class="d-flex" method="GET" action="{% url 'market:market_search_result' %}">
+    {% csrf_token %}
+    <input style="width:100%; border: 2px solid #a09d9d;" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger px-5" type="submit">Search</button>
+  </form>
+</div> -->
+
+
+
+<!-- BLOCK CONTENT -->
+<div class="container" style="background-color: rgb(255, 255, 255);">
+  <br><br><br><br>
+
+  {% block content %}
+
+  {% endblock %}
+</div>
+
+
+
+<!-- footer -->
+<div class="container-fluid mt-5 bg-dark">
+  <div class="row p-3" style="color:#ffffff; text-shadow:0px 1px #FFFFFF;">
+
+    <div style="text-align:center" class="col-md-4">© copyright 2021</div>
+
+    <div style="text-align:center"  class="col-md-4">Designed & Developed By: Gbenga Ogunkuade</div>
+
+    <div style="text-align:center"  class="col-md-4">Tel: +234 8067647853</div>
+
+  </div>
+</div>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+   
+
+
+<script>
+
+  // -----------------------------------------------------------------------------------------------
+  // DETAILVIEW FORM
+  // -----------------------------------------------------------------------------------------------
+
+  // INCREASING THE VALUE
+  function increaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('number').value = value;
+  }
+
+
+  // DECREASING THE VALUE
+  function decreaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value--;
+  value < 1 ? value = 1 : '1';
+  // value--; DO NOTHING IF value is lesser than 1
+  document.getElementById('number').value = value;
+  }
+
+
+
+
+  // -----------------------------------------------------------------------------------------------
+  // MESSAGES DISAPPEAR CONTAINER
+  // -----------------------------------------------------------------------------------------------
+  // suppose the `id` attribute of element is `message_disappear_container`.
+  var message_element = document.getElementById("message_disappear_container");
+
+  setTimeout(function(){ 
+      message_element.style.display = "none"; 
+  }, 2000);
+  // Timeout is 2 sec, you can change it
+
+
+
+
+
+
+
+  // -----------------------------------------------------------------------------------------------
+  // FULL SCREEN OVERLAY NAVIGATION SCRIPT
+  // -----------------------------------------------------------------------------------------------
+
+  function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
+}
+
+
+
+  
+  /*------------------------ MODAL BOX SCRIPT ----------------------------------*/
+
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+  modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+  modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+  }
+
+
+</script>
+
+</body>
+</html>
+
+

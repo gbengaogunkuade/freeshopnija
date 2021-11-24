@@ -1,0 +1,58 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+
+
+
+<!-- BREADCRUMB -->
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">Login</li>
+  </ol>
+</nav> -->
+
+
+<div class="row">
+
+    <div class="col-md-3" style="color:black;">&nbsp;</div>
+
+    <div class="col-md-6" style="color:black; height:500px;">
+        <h3>Login</h3>
+        <br>
+
+        <form class="form-group g-3" action="{% url 'freeshop_login' %}" method="POST">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input class="form-control" type="text" name="username" placeholder="Enter Your Username" required>
+            <br>
+            <label>Password</label>
+            <input class="form-control" type="password" name="password" placeholder="Enter Your Password" required>
+
+            <br>
+            <button class="btn btn-primary px-5" type="submit">Login</button>
+
+            <br><br>
+
+            <span class="me-5"><a href="{% url 'password_reset' %}">Forgot Password?</a></span>
+
+            <span class="mx-4">Need An Account? <a href="{% url 'freeshop_register' %}">Sign Up Now</a></span>
+
+        </form>
+
+    </div>
+
+
+    <div class="col-md-3" style="color:black;">&nbsp;</div>
+
+
+</div>
+
+
+{% endblock %}

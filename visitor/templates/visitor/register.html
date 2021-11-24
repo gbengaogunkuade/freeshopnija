@@ -1,0 +1,77 @@
+
+
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+
+
+<!-- BREADCRUMB -->
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">Register</li>
+  </ol>
+</nav> -->
+
+
+
+
+<!-- ALERT FOR MESSAGES -->
+{% include 'visitor/messages.html' %}
+
+
+
+<div class="row">
+
+  <div class="col-md-3" style="color:black;">
+    &nbsp;
+  </div>
+
+  <div class="col-md-6" style="color:black;">
+    <h3>New Here? Register Below!</h3>
+
+        <form class="form-group" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.username|as_crispy_field }}
+        <br>
+        {{ form.first_name|as_crispy_field }}
+        <br>
+        {{ form.last_name|as_crispy_field }}
+        <br>
+        {{ form.email|as_crispy_field }}
+        <br>
+        {{ form.verify_email|as_crispy_field }}
+        <br>
+        {{ form.password1|as_crispy_field }}
+        <br>
+        {{ form.password2|as_crispy_field }}
+        <br>
+        <button type="submit" class="btn btn-primary me-4">Register</button>
+
+        Already Have An Account? <a href="{% url 'freeshop_login' %}">Log In</a>
+
+        </form>
+
+        <div style="margin-top:10px;">
+        
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3" style="color:black;">
+      &nbsp;
+    </div>
+
+</div>
+
+
+{% endblock %}

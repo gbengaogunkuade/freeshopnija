@@ -1,0 +1,87 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!-- for loading "django.contrib.humanize" responsible for adding human touch to templates -->
+{% load humanize %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="row">
+    {% for object in objects %}
+        <div class="col-md-3 p-2 mb-4" style="text-align:center; ">
+            <div class="specialcard p-3" style="font-size: 19px; color:#222222;"> 
+            {% if object.sellcategory.category == "Electronics" %}
+              <span class="badge bg-danger py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% elif object.sellcategory.category == "Phones & Tablets" %}  
+              <span class="badge bg-success py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% elif object.sellcategory.category == "Vehicles" %}  
+              <span class="badge bg-primary py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% elif object.sellcategory.category == "Fashion" %}  
+              <span class="badge bg-secondary py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% elif object.sellcategory.category == "Baby Products" %}   
+              <span class="badge bg-dark py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% elif object.sellcategory.category == "Others" %}   
+              <span class="badge bg-warning py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+            {% else %}  
+              &nbsp;
+            {% endif %}
+
+                <a href="{% url 'market:detail' object.slug %}">
+                <img class="mt-2" src="{{ object.picture1}}" alt="..." style="width:100%; margin:0 auto 0 auto;">
+                <h5>{{ object.title }}</h5>
+                </a>
+                <strong>₦{{ object.price|intcomma }}</strong>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+<div class="row">
+  <div class="col-md-12" >
+    <!-- PAGINATION LOGIC -->
+    <div class="text-center mt-3 mb-3">
+
+      {% if objects %}                                       <!-- IF THIS PAGE IS PAGINATED -->
+
+            {% if page_obj.has_previous %}                          <!-- IF THIS PAGE HAS PREVIOUS PAGE -->
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page=1"><i class="bi bi-chevron-bar-left"></i></a>
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-caret-left-fill"></i></a>
+            {% endif %}
+
+
+            {% for num in page_obj.paginator.page_range %}          <!-- LOOP OVER ALL THE PAGE NUMBERS -->
+                {% if page_obj.number == num %}                     <!-- IF THIS IS THE CURRENT PAGE -->
+                    <a style="background-color: #BD3F07; color: #FFFFFF; padding: 3px 9px 3px 9px; text-decoration: none;" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <!-- OTHER PAGES -->
+                    <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px 9px 3px 9px; text-decoration: none;" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+
+            {% if page_obj.has_next %}                          <!-- IF THIS PAGE HAS NEXT PAGE -->
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.next_page_number }}"><i class="bi bi-caret-right-fill"></i></a>
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.paginator.num_pages }}"><i class="bi bi-chevron-bar-right"></i></a>
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}

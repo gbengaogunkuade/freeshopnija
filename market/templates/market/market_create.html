@@ -1,0 +1,35 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">Sell</li>
+  </ol>
+</nav> -->
+
+
+
+<div class="row mt-5 mb-5" style="color:#222222;">
+  <div class="col-md-12">
+
+    <h1>Have Something To Sell? Post It Below!</h1>
+    <br>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="padding-bottom: 25px;">{{ form|crispy }}</div>
+            <br>
+            <button class="btn btn-primary" type="submit">Post</button>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

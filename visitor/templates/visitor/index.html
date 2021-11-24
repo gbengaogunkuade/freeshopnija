@@ -1,0 +1,61 @@
+
+{% extends 'visitor/base.html' %}
+
+
+{% block content %}
+
+
+
+
+<!-- ALERT FOR MESSAGES -->
+{% include 'visitor/messages.html' %}
+
+
+
+
+<div class="container p-3 my-3"><h1>WELCOME TO THE HOME PAGE</h1></div>
+
+
+<div class="beauty1">
+    <div class="container p-3 my-3">
+        {% for post in posts %}
+
+            <table class="table table-bordered" style="width: 100%; margin-bottom: 50px;">
+                <tr>
+                    <td>
+
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ post.picture1.url }}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{ post.picture1.ur2 }}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{ post.picture1.ur3 }}" class="d-block w-100" alt="...">
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+                    </td>
+                </tr>
+            </table>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">Index</li>
+  </ol>
+</nav>
+
+
+
+<!-- ALERT FOR MESSAGES -->
+{% include 'visitor/messages.html' %}
+
+
+
+
+<h1>HOT SALES!</h1>
+
+
+<div class="beauty1">
+    <div class="container p-3 my-3">
+        {% for post in posts %}
+
+
+            <table class="table table-bordered" style="font-size:20px;">
+                <tr>
+                    <td width="100%">
+                        SELLER: <strong>{{ post.seller.first_name|upper }} {{ post.seller.last_name|upper }}</strong>
+                        <br>
+                        TITLE: <strong>{{ post.title }}</strong>
+                        <br>
+                        CATEGORY: <strong>{{ post.sellcategory }}</strong>
+                        <br>
+                        DESCRIPTION: <strong>{{ post.description }}</strong>
+                        <br>
+                        DATE: <strong>{{ post.date_posted }}</strong>
+                        <br>
+                        TELEPHONE: <strong>{{ post.telephone_number }}</strong>
+                        <br>
+                        PRICE: <strong>{{ post.price }}</strong>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="table table-bordered" style="width: 100%; margin-bottom: 50px;">
+                <tr>
+                    <td>
+                    <img style="width:100%; height:350px;" src="{{ post.picture1.url }}">
+                    </td>
+                    <td>
+                    <img style="width:100%; height:350px;" src="{{ post.picture2.url }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <img style="width:100%; height:350px;" src="{{ post.picture3.url }}">
+                    </td>
+                    <td>
+                    <img style="width:100%; height:350px;" src="{{ post.picture4.url }}">
+                    </td>
+                </tr>
+            </table>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

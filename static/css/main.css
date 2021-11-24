@@ -1,0 +1,52 @@
+
+/* body{
+	background: #222222;
+	color: #ffffff;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+} */
+
+
+
+
+
+
+h1{
+	font-size: 40px;
+}
+
+
+
+.warning{
+	border: 1px solid #FFFFFF;
+	background-color: #E10606;
+	padding: 5px 10px 5px 10px;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+
+
+.success{
+	border: 1px solid #FFFFFF;
+	background-color: #239517;
+	padding: 5px 10px 5px 10px;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

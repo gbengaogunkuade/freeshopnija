@@ -1,0 +1,115 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+      <li class="breadcrumb-item"><a href="#">VEHICLE</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">{{ user.first_name }} {{ user.last_name }}</li>
+  </ol>
+</nav>
+
+
+
+<!-- ALERT FOR MESSAGES -->
+{% include 'visitor/messages.html' %}
+
+
+
+<div class="beauty1">
+    <div class="container p-3 my-3">
+        {% for post in posts %}
+
+
+            <table class="table table-bordered" style="font-size:18px;">
+                <tr>
+                    <td width="100%">
+                        SELLER: <strong>{{ post.seller.first_name|upper }} {{ post.seller.last_name|upper }}</strong>
+                        <br>
+                        TITLE: <a href="{% url 'market:detail' post.slug %}"><strong>{{ post.title }}</strong></a>
+                        <br>
+                        CATEGORY: <strong>{{ post.sellcategory }}</strong>
+                        <br>
+                        DESCRIPTION: <strong>{{ post.description }}</strong>
+                        <br>
+                        DATE: <strong>{{ post.date_posted|date:"F d, Y, H:i:s" }}</strong>
+                        <br>
+                        TELEPHONE: <strong>{{ post.telephone_number }}</strong>
+                        <br>
+                        PRICE: <strong>{{ post.price }}</strong>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="table table-bordered" style="width: 100%; margin-bottom: 50px;">
+                <tr>
+                    <td>
+                    <img style="width:100%; height:200px;" src="{{ post.picture1.url }}">
+                    </td>
+                    <td>
+                    <img style="width:100%; height:200px;" src="{{ post.picture2.url }}">
+                    </td>
+                    <td>
+                    <img style="width:100%; height:200px;" src="{{ post.picture3.url }}">
+                    </td>
+                    <td>
+                    <img style="width:100%; height:200px;" src="{{ post.picture4.url }}">
+                    </td>
+                </tr>
+            </table>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+<!-- PAGINATION LOGIC -->
+
+<div style="background-color: #; height: 100px;">
+
+        <div style="float: left; width: 5%;">&nbsp</div>
+
+        <div style="float: left; width: 85%; padding: 2% 2% 2% 2%; border-radius:0px; margin-left: 6%;">
+
+
+        {% if is_paginated %}      <!-- IF THIS PAGE IS PAGINATED -->
+
+            {% if page_obj.has_previous %}       <!-- IF THIS PAGE HAS PREVIOUS PAGE -->
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page=1">First</a>
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+
+            {% for num in page_obj.paginator.page_range %}          <!-- LOOP OVER ALL THE PAGE NUMBERS -->
+                {% if page_obj.number == num %}                     <!-- IF THIS IS THE CURRENT PAGE -->
+                    <a style="background-color: #BD3F07; color: #FFFFFF; padding: 3px 9px 3px 9px; text-decoration: none;" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <!-- OTHER PAGES -->
+                    <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px 9px 3px 9px; text-decoration: none;" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+
+            {% if page_obj.has_next %}                          <!-- IF THIS PAGE HAS NEXT PAGE -->
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a style="background-color: #0974E9; color: #FFFFFF; padding: 3px; text-decoration: none;" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
+
+       </div>
+
+</div>
+
+
+
+{% endblock %}

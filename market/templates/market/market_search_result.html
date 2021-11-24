@@ -1,0 +1,65 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!-- for loading "django.contrib.humanize" responsible for adding human touch to templates -->
+{% load humanize %}
+
+{% block content %}
+
+
+<!-- search form -->
+<div>
+    <form class="d-flex" method="GET" action="{% url 'market:market_search_result' %}">
+      {% csrf_token %}
+      <input style="width:100%; border: 2px solid #a09d9d;" class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-danger" type="submit">Search</button>
+    </form>
+  </div>
+
+
+    <!--NUMBER OF POSTS IN THE MODEL-->
+    <!--{{ num_of_posts }} represents Number Of Posts -->
+    <!--{{ num_of_posts|pluralize|upper }} means returns a Plural Suffix if Number Of Posts is not 1 -->
+    <h1>FOUND {{ num_of_posts }} POST{{ num_of_posts|pluralize|upper }}</h1>
+
+
+    <!-- LISTVIEW -->
+    <!--<h1>Latest News In {{ location }} @ {{ time }}</h1>-->
+
+    <div class="row">
+        {% for object in objects %}
+            <div class="col-md-3 p-2 mb-4" style="text-align:center; ">
+                <div class="specialcard p-3" style="font-size: 19px; color:#222222;"> 
+                {% if object.sellcategory.category == "Electronics" %}
+                <span class="badge bg-danger py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% elif object.sellcategory.category == "Phones & Tablets" %}  
+                <span class="badge bg-success py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% elif object.sellcategory.category == "Vehicles" %}  
+                <span class="badge bg-primary py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% elif object.sellcategory.category == "Fashion" %}  
+                <span class="badge bg-secondary py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% elif object.sellcategory.category == "Baby Products" %}   
+                <span class="badge bg-dark py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% elif object.sellcategory.category == "Others" %}   
+                <span class="badge bg-warning py-2 px-3" style="width: 100%;">{{ object.sellcategory.category }}</span>
+                {% else %}  
+                &nbsp;
+                {% endif %}
+
+                    <a href="{% url 'market:detail' object.slug %}">
+                    <img class="mt-2" src="{{ object.picture1}}" alt="..." style="width:100%; margin:0 auto 0 auto;">
+                    <h5>{{ object.title }}</h5>
+                    </a>
+                    <strong>₦{{ object.price|intcomma }}</strong>
+                </div>
+            </div>
+        {% endfor %}
+</div>
+
+
+
+{% endblock %}
+

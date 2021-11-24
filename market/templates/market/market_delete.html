@@ -1,0 +1,39 @@
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">Delete</li>
+  </ol>
+</nav>
+
+
+
+<!-- ALERT FOR MESSAGES -->
+{% include 'visitor/messages.html' %}
+
+
+<div class="beauty1">
+
+    <div class="container p-3 my-3">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                <h4>Are you sure you want to delete the post: <span style="color:#870505; text-decoration:underline;">"{{ post.title }}"</span></h4>
+                <br>
+
+            <button class="btn btn-danger" type="submit">Yes, Delete</button>
+
+                <a class="btn btn-info" href="{% url 'market:detail' post.slug %}">Cancel</a>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

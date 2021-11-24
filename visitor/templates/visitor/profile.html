@@ -1,0 +1,83 @@
+
+{% extends 'visitor/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+
+
+<!-- BREADCRUMB -->
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:#222222; font-size:15px;">
+    <li class="breadcrumb-item"><a href="{% url 'market:market_home' %}">FREESHOP Online Supermarket</a></li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:#FFFFFF;">{{ user.username|upper }}'s Profile</li>
+  </ol>
+</nav> -->
+
+
+
+<div class="row my-5">
+
+        <div class="col-md-4 bg-light p-0" style="color:black;">
+            <img style="width: 100%;" src="{{ user.userprofile.profile_picture_1.url }}">
+        </div>
+
+        <div class="col-md-8 bg-light" style="color:black;">
+            <div style="font-size:19px;">
+                <br>
+                Username: <span style="font-weight:bold;"><b>{{ user.username }}</b></span><p><p>
+                Full Name: <span style="font-weight:bold;">{{ user.first_name|upper }} {{ user.last_name|upper }}</span><p>
+                Email Address: <span style="font-weight:bold;">{{ user.email }}</span><p>
+                Company Name: <span style="font-weight:bold;">{{ user.userprofile.company_name }}</span><p>
+                Delivery Address: <span style="font-weight:bold;">{{ user.userprofile.delivery_address }}</span><p>
+                Telephone: <span style="font-weight:bold;">{{ user.userprofile.telephone_number }}</span><p>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="col-md-12 p-0" style="color:black;">
+            <div style="margin-top: 20px;">
+                <form class="form-group" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div style="padding-bottom: 25px;">{{ u_form|crispy }}</div>
+                    <div style="padding-bottom: 25px;">{{ p_form|crispy }}</div>
+
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </form>
+            </div>
+        </div> -->
+
+
+        <div class="col-md-12 p-0" style="color:black;">
+            <div style="margin-top: 20px;">
+                <form class="form-group" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    Username: {{ u_form.username }}<br>
+                    Email: {{ u_form.email }}<br>
+                    FirstName: {{ u_form.first_name }}<br>
+                    LastName: {{ u_form.last_name }}<br>
+
+                    Company Name: {{ p_form.company_name }}<br>
+                    Delivery Address: {{ p_form.delivery_address }}<br>
+                    Phone Number: {{ p_form.telephone_number }}<br>
+                    First Profile Photo: {{ p_form.profile_picture_1 }}<br>
+                    <br>
+                    Second Profile Photo: {{ p_form.profile_picture_2 }}<br>
+                    <br>
+
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+
+        
+
+</div>
+
+{% endblock %}
